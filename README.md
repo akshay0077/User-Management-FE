@@ -1,70 +1,98 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# UserDash : User Management 
 
-## Available Scripts
+Introducing UserDash User Management : Easy Form Creation Made Simple.
 
-In the project directory, you can run:
+This User Management System is a piece of cake! With our CRUD Operation , Pagination and also Search Functinality
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Create User: Enter the Details and also Validation are there for each and every fields
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Read: by using Single Click to View the Specific User Record in to Appropriate way
 
-### `npm test`
+- Update: Update the User Information
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Delete: Delete the User Information.
 
-### `npm run build`
+- Pagination : Simple and Smooth Pagination are there .
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Search : Based on User Name Search are there. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Run Locally
 
-### `npm run eject`
+Clone the project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+  git clone https://github.com/akshay0077/User-Management-FE.git
+  git clone https://github.com/akshay0077/User-Management-BE.git
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to the project directory
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+  cd User-Management-FE
+  cd User-Management-BE
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm start
+```
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Demo
 
-### Analyzing the Bundle Size
+Video Link : 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 1. Home Screen:  See All User Data in One Place
 
-### Advanced Configuration
+This screen displays the User Data in to Table Formate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/01-user-data.png)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 2. Create New User : Enter the Details and Register
 
-### `npm run build` fails to minify
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/02-registration.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 3. Validation :
+
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/03-registration-with-error.png)
+
+
+### 4. User Details in to Pagination View
+
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/04-pagination-view.png)
+
+### 5. Search The User Name and Get the Data
+
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/05-search-by-name.png)
+
+### 6. Action Screen : View,Edit and Delete Action in One Place
+
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/06-action-view.png)
+
+### 7. Specific User Details :
+
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/07-user-details.png)
+
+### 8. Update the User Details :
+![alt text](https://raw.githubusercontent.com/akshay0077/User-Management-FE/master/website-screenshot/08-user-update.png)
+
+
+
+## Authors
+
+- [@Akshay Kher](https://github.com/akshay0077)
