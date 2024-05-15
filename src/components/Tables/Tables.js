@@ -1,124 +1,180 @@
-import React from 'react'
+import React from "react";
 
-import { NavLink } from 'react-router-dom';
-import { ToastContainer, toast } from "react-toastify"
+import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Badge from 'react-bootstrap/Badge';
+import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
+import Table from "react-bootstrap/Table";
+import Dropdown from "react-bootstrap/Dropdown";
+import Badge from "react-bootstrap/Badge";
 
-import Paginations from '../pagination/Paginations';
-import { statuschangefunc } from "../../services/Apis"
-import "./table.css"
-import {BASE_URL} from "../../services/helper"
+import { IoMdEye } from "react-icons/io";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEllipsisVertical } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa";
 
+import Paginations from "../pagination/Paginations";
+import { changeUserStatus } from "../../services/Apis";
+import { BASE_URL } from "../../services/helper";
+import "./table.css";
 
-const Tables = ({ userdata, deleteUser, userGet, handlePrevious, handleNext, page, pageCount, setPage }) => {
+const Tables = ({
+  userData,
+  handleDeleteUser,
+  handleFetchUsers,
+  handlePreviousPage,
+  handleNextPage,
+  currentPage,
+  totalPages,
+  handleSetPage,
+}) => {
+  // Function to handle status change
   const handleChange = async (id, status) => {
     try {
-      const response = await statuschangefunc(id, status);
+      const response = await changeUserStatus(id, status);
 
       if (response !== undefined) {
-        userGet();
-        toast.success("Status Updated")
+        handleFetchUsers();
+        toast.success("Status Updated");
       } else {
-        toast.error("Failed to update status ")
+        toast.error("Failed to update status ");
       }
     } catch (error) {
       toast.error("An error occurred while updating status");
-      console.error("Error updating status:", error);
     }
-  }
+  };
 
   return (
-      <div className="container">
-        <Row>
-          <div className="col mt-0">
-            <Card className='shadow'>
-              <Table className='align-items-center' responsive="sm">
-                <thead className='thead-dark'>
-                  <tr className='table-dark'>
-                    <th>ID</th>
-                    <th>FullName</th>
-                    <th>Email</th>
-                    <th>Gender</th>
-                    <th>&nbsp;&nbsp;&nbsp;Status</th>
-                    <th>Profile</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    userdata.length > 0 ? userdata.map((element, index) => {
-                      return (
-                        <>
-                          <tr>
-                            <td>{index + 1 + (page - 1) * 4}</td>
-                            <td>{element.fname +'   '+ element.lname}</td>
-                            <td>{element.email}</td>
-                            <td>{element.gender === "Male" ? "M" : "F"}</td>
-                            <td className='d-flex align-items-center'>
-                              <Dropdown className='text-center'>
-                                <Dropdown.Toggle className='dropdown_btn' id="dropdown-basic">
-                                  <Badge bg={element.status === "Active" ? "primary" : "danger"}>
-                                    {element.status} <i class="fa-solid fa-angle-down"></i>
-                                  </Badge>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                  <Dropdown.Item onClick={() => handleChange(element._id, "Active")}>Active</Dropdown.Item>
-                                  <Dropdown.Item onClick={() => handleChange(element._id, "InActive")}>InActive</Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </td>
-                            <td className='img_parent'>
-                              <img src={`${BASE_URL}/uploads/${element.profile}`} alt="img" />
-                            </td>
-                            <td>
-                              <Dropdown>
-                                <Dropdown.Toggle variant='light'  id="dropdown-basic">
-                                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                  <Dropdown.Item >
-                                    <NavLink to={`/userprofile/${element._id}`} className="text-decoration-none">
-                                      <i class="fa-solid fa-eye" style={{ color: "green" }}></i> <span>View</span>
-                                    </NavLink>
-                                  </Dropdown.Item>
-                                  <Dropdown.Item >
-                                    <NavLink to={`/edit/${element._id}`} className="text-decoration-none">
-                                      <i class="fa-solid fa-pen-to-square" style={{ color: "blue" }}></i> <span>Edit</span>
-                                    </NavLink>
-                                  </Dropdown.Item>
-                                  <Dropdown.Item >
-                                    <div onClick={() => deleteUser(element._id)}>
-                                      <i class="fa-solid fa-trash" style={{ color: "red" }}></i> <span>Delete</span>
-                                    </div>
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </td>
-                          </tr>
-                        </>
-                      )
-                    }) : <div className='no_data text-center'>NO Data Found</div>
-                  }
-                </tbody>
-              </Table>
-              <Paginations
-                handlePrevious={handlePrevious}
-                handleNext={handleNext}
-                page={page}
-                pageCount={pageCount}
-                setPage={setPage}
-              />
-            </Card>
-          </div>
-        </Row>
-        <ToastContainer />
-      </div>
-  )
-}
+    <div className="container">
+      <Row>
+        <div className="col mt-0">
+          <Card className="shadow">
+            <Table className="align-items-center" responsive="sm">
+              <thead className="thead-dark">
+                <tr className="table-dark">
+                  <th>ID</th>
+                  <th>FullName</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>&nbsp;&nbsp;&nbsp;Status</th>
+                  <th>Profile</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userData.length > 0 ? (
+                  userData.map((element, index) => {
+                    return (
+                      <>
+                        <tr>
+                          <td>{index + 1 + (currentPage - 1) * 4}</td>
+                          <td>{element.fname + "   " + element.lname}</td>
+                          <td>{element.email}</td>
+                          <td>{element.gender === "Male" ? "M" : "F"}</td>
+                          <td className="d-flex align-items-center">
+                            <Dropdown className="text-center">
+                              <Dropdown.Toggle
+                                className="dropdown_btn"
+                                id="dropdown-basic"
+                              >
+                                <Badge
+                                  bg={
+                                    element.status === "Active"
+                                      ? "primary"
+                                      : "danger"
+                                  }
+                                >
+                                  {element.status} <FaChevronDown />
+                                </Badge>
+                              </Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                <Dropdown.Item
+                                  onClick={() =>
+                                    handleChange(element._id, "Active")
+                                  }
+                                >
+                                  Active
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                  onClick={() =>
+                                    handleChange(element._id, "InActive")
+                                  }
+                                >
+                                  InActive
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </td>
+                          <td className="img_parent">
+                            <img
+                              src={`${BASE_URL}/uploads/${element.profile}`}
+                              alt="img"
+                            />
+                          </td>
+                          <td>
+                            <Dropdown>
+                              <Dropdown.Toggle
+                                variant="white"
+                                id="dropdown-basic"
+                              >
+                                <FaEllipsisVertical />
+                              </Dropdown.Toggle>
+                              <Dropdown.Menu>
+                                <Dropdown.Item>
+                                  <NavLink
+                                    to={`/userprofile/${element._id}`}
+                                    className="text-decoration-none"
+                                  >
+                                    <IoMdEye size={22} color="green" />{" "}
+                                    <span>View</span>
+                                  </NavLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                  <NavLink
+                                    to={`/edit/${element._id}`}
+                                    className="text-decoration-none"
+                                  >
+                                    <FaRegEdit size={19} color="blue" />{" "}
+                                    <span>Edit</span>
+                                  </NavLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                  <div
+                                    onClick={() =>
+                                      handleDeleteUser(element._id)
+                                    }
+                                  >
+                                    <MdDelete size={23} color="red" />
+                                    <span>Delete</span>
+                                  </div>
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })
+                ) : (
+                  <div className="no_data text-center">NO Data Found</div>
+                )}
+              </tbody>
+            </Table>
+            <Paginations
+              handlePrevious={handlePreviousPage}
+              handleNext={handleNextPage}
+              page={currentPage}
+              pageCount={totalPages}
+              setPage={handleSetPage}
+            />
+          </Card>
+        </div>
+      </Row>
+      <ToastContainer />
+    </div>
+  );
+};
 
-export default Tables
+export default Tables;

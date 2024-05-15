@@ -1,26 +1,27 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from "react";
 
-export const addData = createContext();
-export const updateData = createContext();
-export const dltdata = createContext();
+// Create context objects
+export const AddDataContext = createContext();
+export const UpdateDataContext = createContext();
+export const DeleteDataContext = createContext();
 
 const ContextProvider = ({ children }) => {
+  // State variables for user data, update data, and deleted data
+  const [userData, setUserData] = useState([""]);
+  const [updateData, setUpdateData] = useState("");
+  const [deleteData, setDeleteData] = useState("");
 
-    const [useradd, setUseradd] = useState("");
-    const [update, setUpdate] = useState("");
-    const [deletedata, setDLtdata] = useState("");
+  return (
+    // Provide context values to the nested components
 
-    return (
-        <>
-            <addData.Provider value={{ useradd, setUseradd }}>
-                <updateData.Provider value={{ update, setUpdate }}>
-                    <dltdata.Provider value={{deletedata, setDLtdata}}>
-                        {children}
-                    </dltdata.Provider>
-                </updateData.Provider>
-            </addData.Provider>
-        </>
-    )
-}
+    <AddDataContext.Provider value={{ userData, setUserData }}>
+      <UpdateDataContext.Provider value={{ updateData, setUpdateData }}>
+        <DeleteDataContext.Provider value={{ deleteData, setDeleteData }}>
+          {children}
+        </DeleteDataContext.Provider>
+      </UpdateDataContext.Provider>
+    </AddDataContext.Provider>
+  );
+};
 
-export default ContextProvider
+export default ContextProvider;

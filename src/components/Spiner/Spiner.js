@@ -1,14 +1,15 @@
-import React from 'react'
-import Spinner from 'react-bootstrap/Spinner';
+import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 
 const Spiner = () => {
   return (
-    <>
-      <div className='d-flex justify-content-center align-items-center' style={{ width: "100%", height: "50vh" }}>
-        <Spinner animation="border" variant="danger" />&nbsp; Please wait...
-      </div>
-    </>
-  )
-}
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ width: "100%", height: "50vh" }}>
+      <Spinner animation="border" variant="danger" />
+      &nbsp; Please wait...
+    </div>
+  );
+};
 
-export default Spiner
+export default Spiner;
